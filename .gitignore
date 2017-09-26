@@ -1,0 +1,9 @@
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.db_conf_ragah
+sample_db_conf_ragah
+.nb-gradle/
