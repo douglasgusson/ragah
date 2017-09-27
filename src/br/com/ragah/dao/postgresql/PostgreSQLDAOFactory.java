@@ -2,6 +2,8 @@ package br.com.ragah.dao.postgresql;
 
 import br.com.ragah.dao.DAOException;
 import br.com.ragah.dao.DAOFactory;
+import br.com.ragah.dao.model.CidadeDAO;
+import br.com.ragah.dao.model.UfDAO;
 import br.com.ragah.dao.model.UsuarioDAO;
 import br.com.ragah.domain.Database;
 import java.sql.Connection;
@@ -43,6 +45,16 @@ public class PostgreSQLDAOFactory extends DAOFactory {
     @Override
     public UsuarioDAO getUsuarioDAO() {
         return new PgUsuarioDAO();
+    }
+
+    @Override
+    public UfDAO getUfDAO() {
+        return new PgUfDAO();
+    }
+
+    @Override
+    public CidadeDAO getCidadeDAO() {
+        return new PgCidadeDAO();
     }
 
 }

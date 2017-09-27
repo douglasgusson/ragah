@@ -1,5 +1,7 @@
 package br.com.ragah.dao;
 
+import br.com.ragah.dao.model.CidadeDAO;
+import br.com.ragah.dao.model.UfDAO;
 import br.com.ragah.dao.model.UsuarioDAO;
 import br.com.ragah.dao.postgresql.PostgreSQLDAOFactory;
 import java.sql.Connection;
@@ -15,6 +17,8 @@ public abstract class DAOFactory {
     public static final int OUTRO = 2;
 
     public abstract UsuarioDAO getUsuarioDAO();
+    public abstract UfDAO getUfDAO();
+    public abstract CidadeDAO getCidadeDAO();
     public abstract Connection getConnection();
 
     public static DAOFactory getDAOFactory(int whichfactory) {
