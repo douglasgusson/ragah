@@ -75,7 +75,6 @@ public class FrmUsuarios extends javax.swing.JDialog {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        btNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pedidogm/img/novo_16x16.png"))); // NOI18N
         btNovo.setMnemonic('N');
         btNovo.setText("Novo");
         btNovo.setFocusable(false);
@@ -88,7 +87,6 @@ public class FrmUsuarios extends javax.swing.JDialog {
         });
         jToolBar1.add(btNovo);
 
-        btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pedidogm/img/alterar_16x16.png"))); // NOI18N
         btAlterar.setMnemonic('A');
         btAlterar.setText("Alterar");
         btAlterar.setFocusable(false);
@@ -101,7 +99,6 @@ public class FrmUsuarios extends javax.swing.JDialog {
         });
         jToolBar1.add(btAlterar);
 
-        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pedidogm/img/excluir_16x16.png"))); // NOI18N
         btExcluir.setMnemonic('E');
         btExcluir.setText("Excluir");
         btExcluir.setFocusable(false);
@@ -114,7 +111,6 @@ public class FrmUsuarios extends javax.swing.JDialog {
         });
         jToolBar1.add(btExcluir);
 
-        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/pedidogm/img/sair_16x16.png"))); // NOI18N
         btSair.setMnemonic('S');
         btSair.setText("Sair");
         btSair.setFocusable(false);
