@@ -3,6 +3,7 @@ package br.com.ragah.dao.postgresql;
 import br.com.ragah.dao.DAOException;
 import br.com.ragah.dao.DAOFactory;
 import br.com.ragah.dao.model.CidadeDAO;
+import br.com.ragah.dao.model.EstadoCivilDAO;
 import br.com.ragah.dao.model.FuncaoDAO;
 import br.com.ragah.dao.model.UfDAO;
 import br.com.ragah.dao.model.UsuarioDAO;
@@ -61,6 +62,11 @@ public class PostgreSQLDAOFactory extends DAOFactory {
     @Override
     public FuncaoDAO getFuncaoDAO() {
         return new PgFuncaoDAO();
+    }
+
+    @Override
+    public EstadoCivilDAO getEstadoCivilDAO() {
+        return new PgEstadoCivilDAO();
     }
 
 }

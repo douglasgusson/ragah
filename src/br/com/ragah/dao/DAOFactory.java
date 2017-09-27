@@ -1,6 +1,7 @@
 package br.com.ragah.dao;
 
 import br.com.ragah.dao.model.CidadeDAO;
+import br.com.ragah.dao.model.EstadoCivilDAO;
 import br.com.ragah.dao.model.FuncaoDAO;
 import br.com.ragah.dao.model.UfDAO;
 import br.com.ragah.dao.model.UsuarioDAO;
@@ -21,6 +22,7 @@ public abstract class DAOFactory {
     public abstract UfDAO getUfDAO();
     public abstract CidadeDAO getCidadeDAO();
     public abstract FuncaoDAO getFuncaoDAO();
+    public abstract EstadoCivilDAO getEstadoCivilDAO();
     public abstract Connection getConnection();
 
     public static DAOFactory getDAOFactory(int whichfactory) {
