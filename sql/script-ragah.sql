@@ -63,7 +63,8 @@ CREATE TABLE funcionario (
   data_nascimento  DATE         NOT NULL,
   estado_civil     INTEGER      NOT NULL,
   salario          NUMERIC(7,2) NOT NULL,
-  data_admissao    DATE         NOT NULL,
+  data_admissao    DATE         NULL,
+  data_demissao    DATE         NOT NULL,
   funcao           INTEGER      NOT NULL,
   endereco         VARCHAR(60)  NOT NULL,
   cep              CHAR(8)      NOT NULL,  
@@ -91,6 +92,7 @@ CREATE TABLE telefone_funcionario (
   cod_telefone     SERIAL      NOT NULL,
   matr_funcionario INTEGER     NOT NULL,
   num_telefone     VARCHAR(14) NOT NULL, 
+  descricao        VARCHAR(30) NOT NULL,
   data_criacao     TIMESTAMP   NOT NULL,
   data_atualizacao TIMESTAMP   NOT NULL,
   CONSTRAINT pk_telefone_funcionario
