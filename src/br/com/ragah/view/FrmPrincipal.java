@@ -40,7 +40,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btSair = new javax.swing.JButton();
         barraMenu = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuSistema = new javax.swing.JMenu();
@@ -180,7 +180,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastros.setMnemonic('C');
         menuCadastros.setText("Cadastros");
         menuCadastros.setToolTipText("T");
-        menuCadastros.add(jSeparator1);
+
+        jMenuItem3.setText("Funcionários");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menuCadastros.add(jMenuItem3);
 
         jMenuItem1.setText("Funções");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -324,6 +331,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         estadosCivis.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmFuncionarios funcionarios = new FrmFuncionarios(this);
+        funcionarios.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     private void initialize() {
         setPermissoes();
 
@@ -363,9 +375,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lbAcesso;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbUsuario;
