@@ -60,6 +60,7 @@ CREATE TABLE funcionario (
   nome             VARCHAR(50)  NOT NULL, 
   cpf              CHAR(11)     NOT NULL,
   rg               VARCHAR(20)  NOT NULL,
+  ctps             VARCHAR(20)  NOT NULL,
   data_nascimento  DATE         NOT NULL,
   estado_civil     INTEGER      NOT NULL,
   salario          NUMERIC(7,2) NOT NULL,
