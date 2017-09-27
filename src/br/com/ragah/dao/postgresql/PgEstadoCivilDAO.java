@@ -87,7 +87,7 @@ public class PgEstadoCivilDAO implements EstadoCivilDAO {
         try {
             String SQL
                     = "UPDATE estado_civil\n"
-                    + "   SET cod_estado_civil=?, nome_estado_civil=?, data_criacao=?, data_atualizacao=?\n"
+                    + "   SET nome_estado_civil=?, data_criacao=?, data_atualizacao=?\n"
                     + " WHERE cod_estado_civil=?;";
 
             try (PreparedStatement ps = con.prepareStatement(SQL)) {
