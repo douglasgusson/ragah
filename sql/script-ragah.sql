@@ -55,6 +55,24 @@ CREATE TABLE estado_civil (
 );
 
 
+CREATE TABLE empresa (
+  cod_empresa      SERIAL       NOT NULL,
+  razao_social     VARCHAR(50)  NOT NULL,
+  cnpj             CHAR(14)     NOT NULL,
+  endereco         VARCHAR(60)  NOT NULL,
+  cep              CHAR(8)      NOT NULL,  
+  bairro           VARCHAR(30)  NOT NULL,
+  cidade           INTEGER      NOT NULL,
+  data_criacao     TIMESTAMP    NOT NULL,
+  data_atualizacao TIMESTAMP    NOT NULL,
+  CONSTRAINT pk_empresa
+    PRIMARY KEY (cod_empresa),
+  CONSTRAINT fk_empresa_cidade
+    FOREIGN KEY (cidade)
+    REFERENCES cidade (cod_cidade)
+);
+
+
 CREATE TABLE funcionario (
   matricula        INTEGER      NOT NULL,
   nome             VARCHAR(50)  NOT NULL, 
@@ -71,6 +89,7 @@ CREATE TABLE funcionario (
   cep              CHAR(8)      NOT NULL,  
   bairro           VARCHAR(30)  NOT NULL,
   cidade           INTEGER      NOT NULL,
+  empresa          INTEGER      NOT NULL,
   data_criacao     TIMESTAMP    NOT NULL,
   data_atualizacao TIMESTAMP    NOT NULL,
   CONSTRAINT pk_funcionario
@@ -84,6 +103,9 @@ CREATE TABLE funcionario (
   CONSTRAINT fk_funcionario_cidade
     FOREIGN KEY (cidade)
     REFERENCES cidade (cod_cidade),
+  CONSTRAINT fk_funcionario_empresa
+    FOREIGN KEY (empresa)
+    REFERENCES empresa (cod_empresa),
   CONSTRAINT un_cpf_funcionario
     UNIQUE (cpf)
 );
