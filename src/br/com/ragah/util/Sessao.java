@@ -1,6 +1,7 @@
 
 package br.com.ragah.util;
 
+import br.com.ragah.domain.Empresa;
 import br.com.ragah.domain.Usuario;
 import java.time.format.DateTimeFormatter;
 
@@ -11,13 +12,22 @@ import java.time.format.DateTimeFormatter;
 public class Sessao {
 
     private static Usuario usuario;
+    private static Empresa empresa;
 
     public static Usuario getUsuario() {
-        return usuario;
+        return Sessao.usuario;
     }
 
-    public static void setUsuario(Usuario aUsuario) {
-        usuario = aUsuario;
+    public static void setUsuario(Usuario usuario) {
+        Sessao.usuario = usuario;
+    }
+    
+    public static Empresa getEmpresa() {
+        return Sessao.empresa;
+    }
+
+    public static void setEmpresa(Empresa empresa) {
+        Sessao.empresa = empresa;
     }
 
     public static String acessoToString() {

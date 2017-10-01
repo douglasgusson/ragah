@@ -3,6 +3,7 @@ package br.com.ragah.domain;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,10 @@ public class Funcionario {
     private String cep;
     private String bairro;
     private Cidade cidade;
+    private Empresa empresa;
     private LocalDateTime criacao;
     private LocalDateTime alteracao;
 
+    private List<TelefoneFuncionario> telefonesFuncionario;
+    
 }

@@ -48,8 +48,7 @@ public class PgUfDAO implements UfDAO {
         try {
 
             Connection con = DAOFactory.getDefaultDAOFactory().getConnection();
-
-            Uf uf = null;
+            Uf uf = new Uf();
 
             String query = "SELECT  \n"
                     + "      sigla_uf,\n"
@@ -63,11 +62,8 @@ public class PgUfDAO implements UfDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String sigla = rs.getString(1);
-                String nome = rs.getString(2);
-
-                uf = new Uf(sigla, nome);
-
+                uf.setSigla(rs.getString("sigla_uf"));
+                uf.setNome(rs.getString("nome_uf"));
             }
 
             return uf;

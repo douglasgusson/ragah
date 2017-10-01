@@ -28,28 +28,33 @@ public class PgCidadeDAO implements CidadeDAO {
 
         List<Cidade> cidades = new ArrayList<>();
 
-        try {
-            String SQL = "SELECT * FROM cidade ORDER BY nome_cidade;";
-            ResultSet rs;
-            try (PreparedStatement ps = connection.prepareStatement(SQL)) {
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    Cidade cidade = new Cidade();
-                    Uf estado = new Uf();
+        UfDAO ufDAO = DAOFactory.getDefaultDAOFactory().getUfDAO();
 
-                    cidade.setId(rs.getLong("cod_cidade"));
-                    cidade.setNome(rs.getString("nome_cidade"));
-                    estado.setSigla(rs.getString("sigla_uf"));
-                    cidade.setUf(estado);
-                    cidades.add(cidade);
-                }
+        try {
+
+            String SQL = "SELECT cod_cidade, nome_cidade, sigla_uf FROM cidade ORDER BY nome_cidade;";
+
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Cidade cidade = new Cidade();
+                Uf uf = new Uf();
+
+                cidade.setId(rs.getLong("cod_cidade"));
+                cidade.setNome(rs.getString("nome_cidade"));
+
+                uf = ufDAO.buscarPorSigla(rs.getString("sigla_uf"));
+
+                cidade.setUf(uf);
+                cidades.add(cidade);
             }
+
             rs.close();
 
             return cidades;
 
         } catch (SQLException ex) {
-            Logger.getLogger(PgCidadeDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new RuntimeException("Falha ao listar cidades em JDBCCidadeDAO", ex);
         }
     }
@@ -136,7 +141,9 @@ public class PgCidadeDAO implements CidadeDAO {
         try {
             List<Cidade> cidades = new ArrayList<>();
 
-            String SQL = "SELECT * FROM cidade "
+            UfDAO ufDAO = DAOFactory.getDefaultDAOFactory().getUfDAO();
+
+            String SQL = "SELECT cod_cidade, nome_cidade, sigla_uf FROM cidade "
                     + "WHERE LOWER(nome_cidade) LIKE '%" + nome.toLowerCase() + "%';";
 
             try (PreparedStatement ps = connection.prepareStatement(SQL)) {
@@ -146,10 +153,13 @@ public class PgCidadeDAO implements CidadeDAO {
                 while (rs.next()) {
                     Cidade cidade = new Cidade();
                     Uf uf = new Uf();
+
                     cidade.setId(rs.getLong("cod_cidade"));
                     cidade.setNome(rs.getString("nome_cidade"));
-                    uf.setSigla(rs.getString("sigla_uf"));
+
+                    uf = ufDAO.buscarPorSigla(rs.getString("sigla_uf"));
                     cidade.setUf(uf);
+                    
                     cidades.add(cidade);
                 }
             }

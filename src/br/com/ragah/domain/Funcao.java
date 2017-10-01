@@ -18,5 +18,10 @@ public class Funcao {
     private String descricao;
     private LocalDateTime criacao;
     private LocalDateTime alteracao;
+
+    @Override
+    public String toString() {
+        return this.getDescricao();
+    }
     
 }

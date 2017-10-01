@@ -7,7 +7,7 @@ CREATE TABLE uf (
 
 
 CREATE TABLE cidade (
-  cod_cidade    SERIAL      NOT NULL, 
+  cod_cidade    INTEGER     NOT NULL, 
   nome_cidade   VARCHAR(60) NOT NULL, 
   sigla_uf      CHAR(2)     NOT NULL,
   CONSTRAINT pk_cidade
@@ -77,13 +77,13 @@ CREATE TABLE funcionario (
   matricula        INTEGER      NOT NULL,
   nome             VARCHAR(50)  NOT NULL, 
   cpf              CHAR(11)     NOT NULL,
-  rg               VARCHAR(20)  NOT NULL,
+  rg               VARCHAR(20)  NULL,
   ctps             VARCHAR(20)  NOT NULL,
   data_nascimento  DATE         NOT NULL,
   estado_civil     INTEGER      NOT NULL,
   salario          NUMERIC(7,2) NOT NULL,
-  data_admissao    DATE         NULL,
-  data_demissao    DATE         NOT NULL,
+  data_admissao    DATE         NOT NULL,
+  data_demissao    DATE         NULL,
   funcao           INTEGER      NOT NULL,
   endereco         VARCHAR(60)  NOT NULL,
   cep              CHAR(8)      NOT NULL,  
@@ -107,7 +107,9 @@ CREATE TABLE funcionario (
     FOREIGN KEY (empresa)
     REFERENCES empresa (cod_empresa),
   CONSTRAINT un_cpf_funcionario
-    UNIQUE (cpf)
+    UNIQUE (cpf),
+  CONSTRAINT un_matricula_empresa
+    UNIQUE (matricula, empresa)
 );
 
 
