@@ -1,3 +1,17 @@
+DROP TABLE IF EXISTS funcionario_escala;
+DROP TABLE IF EXISTS ciclo;
+DROP TABLE IF EXISTS escala;
+DROP TABLE IF EXISTS turno;
+DROP TABLE IF EXISTS telefone_funcionario;
+DROP TABLE IF EXISTS funcionario;
+DROP TABLE IF EXISTS empresa;
+DROP TABLE IF EXISTS estado_civil;
+DROP TABLE IF EXISTS funcao;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS cidade;
+DROP TABLE IF EXISTS uf;
+
+
 CREATE TABLE uf ( 
   sigla_uf   CHAR(2)      NOT NULL,
   nome_uf    VARCHAR(40)  NOT NULL,
@@ -124,5 +138,54 @@ CREATE TABLE telefone_funcionario (
     PRIMARY KEY (cod_telefone, matr_funcionario),
   CONSTRAINT fk_telefone_funcionario_funcionario
     FOREIGN KEY (matr_funcionario)
+    REFERENCES funcionario (matricula)
+);
+
+
+CREATE TABLE turno (
+  cod_turno SERIAL  NOT NULL,
+  inicio    TIME    NULL,
+  fim       TIME    NULL,
+  folga     BOOLEAN NOT NULL,
+  CONSTRAINT pk_turno
+    PRIMARY KEY (cod_turno)
+);
+
+
+CREATE TABLE escala (
+  cod_escala SERIAL      NOT NULL,
+  descricao  VARCHAR(40) NOT NULL,
+  data_base  DATE        NOT NULL,
+  CONSTRAINT pk_escala
+    PRIMARY KEY (cod_escala)
+);
+
+
+CREATE TABLE ciclo (
+  cod_turno  INTEGER     NOT NULL,
+  cod_escala INTEGER     NOT NULL,
+  duracao    SMALLINT    NOT NULL,
+  descricao  VARCHAR(40) NOT NULL,
+  CONSTRAINT pk_ciclo 
+    PRIMARY KEY (cod_turno, cod_escala),
+  CONSTRAINT fk_ciclo_turno
+    FOREIGN KEY (cod_turno) 
+    REFERENCES turno (cod_turno),
+  CONSTRAINT fk_ciclo_escala
+    FOREIGN KEY (cod_escala)
+    REFERENCES escala (cod_escala)
+);
+
+
+CREATE TABLE funcionario_escala (
+  cod_escala INTEGER NOT NULL,
+  matricula  INTEGER NOT NULL,
+  CONSTRAINT pk_funcionario_escala
+    PRIMARY KEY (cod_escala, matricula),
+  CONSTRAINT fk_funcionario_escala_escala
+    FOREIGN KEY (cod_escala)
+    REFERENCES escala (cod_escala),
+  CONSTRAINT fk_funcionario_escala_funcionario
+    FOREIGN KEY (matricula)
     REFERENCES funcionario (matricula)
 );
