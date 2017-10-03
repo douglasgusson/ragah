@@ -21,7 +21,7 @@ public class Sessao {
     public static void setUsuario(Usuario usuario) {
         Sessao.usuario = usuario;
     }
-    
+
     public static Empresa getEmpresa() {
         return Sessao.empresa;
     }
@@ -34,5 +34,5 @@ public class Sessao {
         return usuario.getUltimoAcesso().format(
                 DateTimeFormatter.ofPattern("EEE, dd MMM yyyy, HH:mm"));
     }
-    
+
 }

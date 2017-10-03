@@ -66,7 +66,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="1" pref="477" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="1" pref="512" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="tfMatricula" min="-2" pref="67" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -106,13 +106,17 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="tfCtps" max="32767" attributes="0"/>
-                                  <Component id="tfCpf" alignment="1" pref="203" max="32767" attributes="0"/>
+                                  <Component id="tfCpf" alignment="1" pref="179" max="32767" attributes="0"/>
                                   <Component id="dcDataNacimento" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="cbEstadoCivil" min="-2" pref="174" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btNovoEstadoCivil" min="-2" pref="43" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -121,15 +125,17 @@
                                       <Component id="tfRg" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfSalario" min="-2" pref="194" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="cbEstadoCivil" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="cbFuncao" min="-2" pref="224" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btNovaFuncao" min="-2" pref="43" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -175,6 +181,7 @@
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btNovoEstadoCivil" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="dcDataNacimento" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -196,6 +203,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btNovaFuncao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -444,6 +452,24 @@
     <Component class="com.toedter.calendar.JDateChooser" name="dcDataAdmissao">
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dcDataDemissao">
+    </Component>
+    <Component class="javax.swing.JButton" name="btNovoEstadoCivil">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Cadastrar novo estado civil"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNovoEstadoCivilActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btNovaFuncao">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="..."/>
+        <Property name="toolTipText" type="java.lang.String" value="Cadastrar nova fun&#xe7;&#xe3;o"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btNovaFuncaoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

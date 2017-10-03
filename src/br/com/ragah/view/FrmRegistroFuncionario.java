@@ -12,15 +12,14 @@ import br.com.ragah.domain.Funcao;
 import br.com.ragah.domain.Funcionario;
 import br.com.ragah.domain.TelefoneFuncionario;
 import br.com.ragah.table.model.TelefoneFuncionarioTableModel;
+import br.com.ragah.util.DateUtils;
 import br.com.ragah.util.Sessao;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Window;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -87,20 +86,28 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
         this.tfMatricula.requestFocus();
         this.tfMatricula.setBorder(borderDefault);
         getRootPane().setDefaultButton(btGravar);
+        atualizarCBEstadoCivil();
+        atualizarCBFuncao();
+        atualizarTabelaTelefones();
+    }
+
+    private void atualizarCBEstadoCivil() {
 
         EstadoCivilDAO estadoCivilDAO = DAOFactory.getDefaultDAOFactory().getEstadoCivilDAO();
         ecs = new Vector<>(estadoCivilDAO.listarTodos());
 
-        FuncaoDAO funcaoDAO = DAOFactory.getDefaultDAOFactory().getFuncaoDAO();
-        funcoes = new Vector<>(funcaoDAO.listarTodos());
-
         modeloComboBoxEstadoCivil = new DefaultComboBoxModel<>(ecs);
         cbEstadoCivil.setModel(modeloComboBoxEstadoCivil);
+    }
+
+    private void atualizarCBFuncao() {
+
+        FuncaoDAO funcaoDAO = DAOFactory.getDefaultDAOFactory().getFuncaoDAO();
+        funcoes = new Vector<>(funcaoDAO.listarTodos());
 
         modeloComboBoxFuncao = new DefaultComboBoxModel<>(funcoes);
         cbFuncao.setModel(modeloComboBoxFuncao);
 
-        atualizarTabelaTelefones();
     }
 
     private void atualizarTabelaTelefones() {
@@ -172,6 +179,8 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
         dcDataNacimento = new com.toedter.calendar.JDateChooser();
         dcDataAdmissao = new com.toedter.calendar.JDateChooser();
         dcDataDemissao = new com.toedter.calendar.JDateChooser();
+        btNovoEstadoCivil = new javax.swing.JButton();
+        btNovaFuncao = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,6 +282,22 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
             }
         });
 
+        btNovoEstadoCivil.setText("...");
+        btNovoEstadoCivil.setToolTipText("Cadastrar novo estado civil");
+        btNovoEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoEstadoCivilActionPerformed(evt);
+            }
+        });
+
+        btNovaFuncao.setText("...");
+        btNovaFuncao.setToolTipText("Cadastrar nova função");
+        btNovaFuncao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovaFuncaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,7 +320,7 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                             .addComponent(jLabel18))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,24 +353,30 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(tfCtps)
-                                    .addComponent(tfCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                                    .addComponent(tfCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                                     .addComponent(dcDataNacimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btNovoEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfRg))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(cbEstadoCivil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(tfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btNovaFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(dcDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,7 +411,8 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
                         .addComponent(jLabel7)
-                        .addComponent(cbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbEstadoCivil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btNovoEstadoCivil))
                     .addComponent(dcDataNacimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -397,7 +429,8 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(cbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btNovaFuncao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -456,14 +489,13 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
 
             FuncionarioDAO fdao = DAOFactory.getDefaultDAOFactory().getFuncionarioDAO();
             TelefoneFuncionarioDAO tfdao = DAOFactory.getDefaultDAOFactory().getTelefoneFuncionarioDAO();
+            DateUtils dateUtils = new DateUtils();
 
             switch (opcao) {
 
                 case OPCAO_INSERIR:
 
                     Funcionario f = new Funcionario();
-                    Instant instant;
-                    LocalDateTime dateTime;
 
                     f.setMatricula(Integer.parseInt(tfMatricula.getText()));
                     f.setNome(tfNome.getText());
@@ -471,33 +503,19 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                     f.setRg(tfRg.getText());
                     f.setCtps(tfCtps.getText());
 
-                    try {
-                        instant = dcDataNacimento.getCalendar().toInstant();
-                        dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                        LocalDate dataNascimento = dateTime.toLocalDate();
-                        f.setDataNascimento(dataNascimento);
-                    } catch (Exception e) {
-
-                    }
+                    LocalDate dataNascimento = dateUtils.calendarToLocalDate(dcDataNacimento.getCalendar());
+                    f.setDataNascimento(dataNascimento);
 
                     EstadoCivil ec = (EstadoCivil) cbEstadoCivil.getItemAt(cbEstadoCivil.getSelectedIndex());
                     f.setEstadoCivil(ec);
 
                     f.setSalario(new BigDecimal(tfSalario.getText().replace(",", ".")));
 
-                    try {
-                        instant = dcDataAdmissao.getCalendar().toInstant();
-                        dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                        LocalDate dataAdmissao = dateTime.toLocalDate();
-                        f.setDataAdmissao(dataAdmissao);
-                    } catch (Exception e) {
-
-                    }
+                    LocalDate dataAdmissao = dateUtils.calendarToLocalDate(dcDataAdmissao.getCalendar());
+                    f.setDataAdmissao(dataAdmissao);
 
                     if (dcDataDemissao.getCalendar() != null) {
-                        instant = dcDataDemissao.getCalendar().toInstant();
-                        dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-                        LocalDate dataDemissao = dateTime.toLocalDate();
+                        LocalDate dataDemissao = dateUtils.calendarToLocalDate(dcDataDemissao.getCalendar());
                         f.setDataDemissao(dataDemissao);
                     } else {
                         f.setDataDemissao(null);
@@ -510,14 +528,12 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                     f.setCep(tfCep.getText());
                     f.setBairro(tfBairro.getText());
 
-                    f.setCidade(cidade);                    
-                    f.setEmpresa(Sessao.getEmpresa());                    
+                    f.setCidade(cidade);
+                    f.setEmpresa(Sessao.getEmpresa());
                     f.setTelefonesFuncionario(listaTelefones);
 
                     f.setCriacao(LocalDateTime.now());
                     f.setAlteracao(LocalDateTime.now());
-
-                    System.out.println(f.toString());
 
                     fdao.inserir(f);
 
@@ -525,6 +541,8 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                         listaTelefones.get(i).setFuncionario(f);
                         tfdao.inserir(listaTelefones.get(i));
                     }
+
+                    System.out.println(f.toString());
 
                     break;
 
@@ -588,9 +606,23 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tfCidadeFocusLost
 
+    private void btNovaFuncaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovaFuncaoActionPerformed
+        FrmFuncoes frmFuncoes = new FrmFuncoes(this);
+        frmFuncoes.setVisible(true);
+        atualizarCBFuncao();
+    }//GEN-LAST:event_btNovaFuncaoActionPerformed
+
+    private void btNovoEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoEstadoCivilActionPerformed
+        FrmEstadosCivis frmEstadosCivis = new FrmEstadosCivis(this);
+        frmEstadosCivis.setVisible(true);
+        atualizarCBEstadoCivil();
+    }//GEN-LAST:event_btNovoEstadoCivilActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brAddTelefone;
     private javax.swing.JButton btGravar;
+    private javax.swing.JButton btNovaFuncao;
+    private javax.swing.JButton btNovoEstadoCivil;
     private javax.swing.JButton btSair;
     private javax.swing.JComboBox cbEstadoCivil;
     private javax.swing.JComboBox cbFuncao;

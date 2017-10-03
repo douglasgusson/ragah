@@ -8,6 +8,10 @@ import br.com.ragah.dao.model.EstadoCivilDAO;
 import br.com.ragah.dao.model.FuncaoDAO;
 import br.com.ragah.dao.model.FuncionarioDAO;
 import br.com.ragah.dao.model.TelefoneFuncionarioDAO;
+import br.com.ragah.domain.Cidade;
+import br.com.ragah.domain.Empresa;
+import br.com.ragah.domain.EstadoCivil;
+import br.com.ragah.domain.Funcao;
 import br.com.ragah.domain.Funcionario;
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,7 +30,7 @@ public class PgFuncionarioDAO implements FuncionarioDAO {
 
     @Override
     public List<Funcionario> listarTodos() {
-        
+
         Connection connection = DAOFactory.getDefaultDAOFactory().getConnection();
 
         EstadoCivilDAO estadoCivilDAO = DAOFactory.getDefaultDAOFactory().getEstadoCivilDAO();
@@ -34,12 +38,16 @@ public class PgFuncionarioDAO implements FuncionarioDAO {
         CidadeDAO cidadeDAO = DAOFactory.getDefaultDAOFactory().getCidadeDAO();
         EmpresaDAO empresaDAO = DAOFactory.getDefaultDAOFactory().getEmpresaDAO();
         TelefoneFuncionarioDAO telefoneFuncionarioDAO = DAOFactory.getDefaultDAOFactory().getTelefoneFuncionarioDAO();
-        
+
         List<Funcionario> funcionarios = new ArrayList<>();
-    
+
         try {
             String query
-                    = "";
+                    = "SELECT matricula, nome, cpf, rg, ctps, data_nascimento, estado_civil, \n"
+                    + "       salario, data_admissao, data_demissao, funcao, endereco, cep, \n"
+                    + "       bairro, cidade, empresa, data_criacao, data_atualizacao\n"
+                    + "  FROM funcionario\n"
+                    + "ORDER BY nome;";
 
             PreparedStatement ps = connection.prepareStatement(
                     query, ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -51,13 +59,39 @@ public class PgFuncionarioDAO implements FuncionarioDAO {
 
                 Funcionario f = new Funcionario();
 
-                f.setMatricula(rs.getInt(1));
-                
-                f.setDataNascimento(rs.getDate(12).toLocalDate());
-                
-                f.setCriacao(rs.getTimestamp(13).toLocalDateTime());
-                f.setAlteracao(rs.getTimestamp(14).toLocalDateTime());
+                f.setMatricula(rs.getInt("matricula"));
+                f.setNome(rs.getString("nome"));
+                f.setCpf(rs.getString("cpf"));
+                f.setRg(rs.getString("rg"));
+                f.setCtps(rs.getString("ctps"));
+//                f.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 
+                EstadoCivil ec = estadoCivilDAO.buscar(rs.getLong("estado_civil"));
+                f.setEstadoCivil(ec);
+
+                f.setSalario(rs.getBigDecimal("salario"));
+                f.setDataAdmissao(rs.getDate("data_admissao").toLocalDate());
+
+                // data de demissão pode possuir um valor nulo
+                if (rs.getDate("data_demissao") != null) {
+                    f.setDataDemissao(rs.getDate("data_demissao").toLocalDate());
+                }
+
+                Funcao funcao = funcaoDAO.buscar(rs.getLong("funcao"));
+                f.setFuncao(funcao);
+
+                f.setEndereco(rs.getString("endereco"));
+                f.setCep(rs.getString("cep"));
+                f.setBairro(rs.getString("bairro"));
+
+                Cidade c = cidadeDAO.buscarPorId(rs.getLong("cidade"));
+                f.setCidade(c);
+
+                Empresa e = empresaDAO.buscar(rs.getLong("empresa"));
+                f.setEmpresa(e);
+
+                f.setCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                f.setAlteracao(rs.getTimestamp("data_atualizacao").toLocalDateTime());
 
                 funcionarios.add(f);
             }
@@ -69,7 +103,7 @@ public class PgFuncionarioDAO implements FuncionarioDAO {
         }
 
         return funcionarios;
-        
+
     }
 
     @Override

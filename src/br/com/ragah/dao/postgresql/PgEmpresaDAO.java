@@ -141,12 +141,16 @@ public class PgEmpresaDAO implements EmpresaDAO {
     @Override
     public Empresa buscar(Long id) {
 
-        Connection con = DAOFactory.getDefaultDAOFactory().getConnection();
+        Connection con = DAOFactory.getDefaultDAOFactory().getConnection();        
+        CidadeDAO cidadeDAO = DAOFactory.getDefaultDAOFactory().getCidadeDAO();
+        
         Empresa e = new Empresa();
 
         try {
             String query
-                    = "";
+                    = "SELECT cod_empresa, razao_social, cnpj, endereco, cep, bairro, cidade, \n"
+                    + "       data_criacao, data_atualizacao\n"
+                    + "  FROM empresa WHERE cod_empresa = ?;";
 
             PreparedStatement ps = con.prepareStatement(query);
             ps.setLong(1, id);
@@ -154,16 +158,24 @@ public class PgEmpresaDAO implements EmpresaDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                e.setId(rs.getLong(1));
-                e.setRazaoSocial(rs.getString(2));
-                e.setCriacao(rs.getTimestamp(3).toLocalDateTime());
-                e.setAlteracao(rs.getTimestamp(4).toLocalDateTime());
+                e.setId(rs.getLong("cod_empresa"));
+                e.setRazaoSocial(rs.getString("razao_social"));
+                e.setCnpj(rs.getString("cnpj"));
+                e.setEndereco(rs.getString("endereco"));
+                e.setCep(rs.getString("cep"));
+                e.setBairro(rs.getString("bairro"));
+                
+                Cidade cidade = cidadeDAO.buscarPorId(rs.getLong("cidade"));
+                e.setCidade(cidade);
+                                
+                e.setCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                e.setAlteracao(rs.getTimestamp("data_atualizacao").toLocalDateTime());
             }
 
             con.close();
 
         } catch (SQLException ex) {
-            throw new DAOException("Falha ao buscar função por ID em PgFuncaoDAO", ex);
+            throw new DAOException("Falha ao buscar empresa por id em PgEmpresaDAO", ex);
         }
 
         return e;

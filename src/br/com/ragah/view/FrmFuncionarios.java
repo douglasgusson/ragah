@@ -1,6 +1,9 @@
 package br.com.ragah.view;
 
+import br.com.ragah.table.cellrenderer.FuncionarioCellRenderer;
+import br.com.ragah.table.model.FuncionarioTableModel;
 import java.awt.Window;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -26,10 +29,15 @@ public class FrmFuncionarios extends javax.swing.JDialog {
         initialize();
     }
 
-
+    public void atualizarTabela() {
+        tbFuncionarios.setModel(new FuncionarioTableModel());
+        tbFuncionarios.setDefaultRenderer(Object.class, new FuncionarioCellRenderer());
+        ((FuncionarioTableModel) tbFuncionarios.getModel()).atualizarDoBD();
+        ((AbstractTableModel) tbFuncionarios.getModel()).fireTableDataChanged();
+    }
 
     private void initialize() {
-
+        atualizarTabela();
     }
 
     /**
@@ -123,15 +131,15 @@ public class FrmFuncionarios extends javax.swing.JDialog {
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 

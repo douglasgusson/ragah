@@ -2,11 +2,9 @@ package br.com.ragah.view;
 
 import br.com.ragah.dao.DAOFactory;
 import br.com.ragah.dao.model.EmpresaDAO;
-import br.com.ragah.domain.Empresa;
 import br.com.ragah.util.Sessao;
 import br.com.ragah.util.Info;
 import br.com.ragah.util.GUIUtils;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -48,6 +46,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuSistema = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         itemConfiguracoes = new javax.swing.JMenuItem();
         itemMudarSenha = new javax.swing.JMenuItem();
         itemLogout = new javax.swing.JMenuItem();
@@ -56,8 +55,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itemSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PedidoGM");
+        setTitle("Ragah");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -119,9 +121,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                .addComponent(lbAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btLogout)
@@ -173,7 +175,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(429, Short.MAX_VALUE)
+                .addContainerGap(481, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -185,6 +187,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastros.setText("Cadastros");
         menuCadastros.setToolTipText("T");
 
+        jMenuItem3.setMnemonic('F');
         jMenuItem3.setText("Funcionários");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,6 +196,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(jMenuItem3);
 
+        jMenuItem1.setMnemonic('u');
         jMenuItem1.setText("Funções");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +205,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(jMenuItem1);
 
+        jMenuItem2.setMnemonic('E');
         jMenuItem2.setText("Estados Civis");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +219,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/sistema.png"))); // NOI18N
         menuSistema.setMnemonic('S');
         menuSistema.setText("Sistema");
+
+        jMenuItem4.setMnemonic('e');
+        jMenuItem4.setText("Mudar empresa");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        menuSistema.add(jMenuItem4);
 
         itemConfiguracoes.setMnemonic('C');
         itemConfiguracoes.setText("Configurações");
@@ -340,6 +354,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         funcionarios.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FrmBuscaEmpresa buscaEmpresa = new FrmBuscaEmpresa(this);
+        buscaEmpresa.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.setTitle(Info.getNameMoreVersion()
+                + " - " + Sessao.getEmpresa().getRazaoSocial());
+    }//GEN-LAST:event_formWindowActivated
+
     private void initialize() {
         setPermissoes();
 
@@ -350,16 +374,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(FrmPrincipal.DO_NOTHING_ON_CLOSE);
 
         if (Sessao.getUsuario().getNovaSenha()) {
-            JOptionPane.showMessageDialog(null, "Por motivos de segurança, será necessário mudar sua senha.");
+            JOptionPane.showMessageDialog(null, 
+                    "Por motivos de segurança, será necessário mudar sua senha.");
             FrmMudaSenha mudaSenha = new FrmMudaSenha(this);
             mudaSenha.setVisible(true);
         }
 
-        EmpresaDAO empresaDAO = DAOFactory.getDefaultDAOFactory().getEmpresaDAO();
-        List<Empresa> empresas = empresaDAO.listarTodas();
-        Empresa empresa = empresas.get(0);
-        Sessao.setEmpresa(empresa);
-        this.setTitle(Info.getNameMoreVersion() + " - " + Sessao.getEmpresa().getRazaoSocial());
+        EmpresaDAO edao = DAOFactory.getDefaultDAOFactory().getEmpresaDAO();
+        if (edao.listarTodas().size() == 1) {
+            Sessao.setEmpresa(edao.listarTodas().get(0));
+        } else {
+            FrmBuscaEmpresa buscaEmpresa = new FrmBuscaEmpresa(this);
+            buscaEmpresa.setVisible(true);
+        }
+
+        this.setTitle(Info.getNameMoreVersion());
 
     }
 
@@ -384,6 +413,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbAcesso;
