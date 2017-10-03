@@ -54,11 +54,11 @@ public class FrmLogin extends javax.swing.JDialog {
         tfUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfSenha = new javax.swing.JPasswordField();
-        btEntrar = new javax.swing.JButton();
-        btSair = new javax.swing.JButton();
         lbEsqueciSenha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lbStatus = new javax.swing.JLabel();
+        btEntrar = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -71,6 +71,9 @@ public class FrmLogin extends javax.swing.JDialog {
 
         jPanel2.setBackground(java.awt.Color.white);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/login_80x80.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel1.setText("Usuário:");
 
         tfUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -79,6 +82,7 @@ public class FrmLogin extends javax.swing.JDialog {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel2.setText("Senha:");
 
         tfSenha.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -87,30 +91,7 @@ public class FrmLogin extends javax.swing.JDialog {
             }
         });
 
-        btEntrar.setBackground(new java.awt.Color(153, 255, 153));
-        btEntrar.setMnemonic('E');
-        btEntrar.setText("Entrar");
-        btEntrar.setContentAreaFilled(false);
-        btEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btEntrar.setOpaque(true);
-        btEntrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEntrarActionPerformed(evt);
-            }
-        });
-
-        btSair.setBackground(new java.awt.Color(255, 204, 204));
-        btSair.setMnemonic('S');
-        btSair.setText("Sair");
-        btSair.setContentAreaFilled(false);
-        btSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btSair.setOpaque(true);
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
-
+        lbEsqueciSenha.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lbEsqueciSenha.setText("<html><a href=\\\"#\\\">Esqueci minha senha</a></html>");
         lbEsqueciSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbEsqueciSenha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -144,34 +125,63 @@ public class FrmLogin extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        btEntrar.setBackground(new java.awt.Color(46, 204, 113));
+        btEntrar.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btEntrar.setMnemonic('E');
+        btEntrar.setText("Entrar");
+        btEntrar.setContentAreaFilled(false);
+        btEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btEntrar.setOpaque(true);
+        btEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEntrarActionPerformed(evt);
+            }
+        });
+
+        btSair.setBackground(new java.awt.Color(231, 76, 60));
+        btSair.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        btSair.setForeground(new java.awt.Color(255, 255, 255));
+        btSair.setMnemonic('S');
+        btSair.setText("Sair");
+        btSair.setContentAreaFilled(false);
+        btSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btSair.setOpaque(true);
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btEntrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btSair))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(tfUsuario)
-                            .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(50, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btSair)
+                        .addGap(3, 3, 3)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -181,13 +191,13 @@ public class FrmLogin extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSair)
-                    .addComponent(btEntrar)
-                    .addComponent(lbEsqueciSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 30, Short.MAX_VALUE)
+                    .addComponent(btEntrar))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -205,31 +215,6 @@ public class FrmLogin extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
-
-        String senha = Seguranca.criptografarSHA256(this.tfSenha.getText());
-
-        Usuario usuario = new Usuario();
-        usuario.setNomeUsuario(this.tfUsuario.getText().trim());
-        usuario.setSenha(senha);
-        usuario.setUltimoAcesso(LocalDateTime.now());
-        usuario.setAtivo(true);
-
-        if (autenticar(usuario)) {
-            this.dispose();
-            FrmPrincipal frmPrincipal = new FrmPrincipal();
-            frmPrincipal.setVisible(true);
-        }
-    }//GEN-LAST:event_btEntrarActionPerformed
-
-    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        if (logout) {
-            GUIUtils.confirmarSaida(this);
-        } else {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btSairActionPerformed
 
     private void tfUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfUsuarioFocusGained
         tfUsuario.selectAll();
@@ -250,6 +235,31 @@ public class FrmLogin extends javax.swing.JDialog {
             System.exit(0);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
+        
+        String senha = Seguranca.criptografarSHA256(this.tfSenha.getText());
+
+        Usuario usuario = new Usuario();
+        usuario.setNomeUsuario(this.tfUsuario.getText().trim());
+        usuario.setSenha(senha);
+        usuario.setUltimoAcesso(LocalDateTime.now());
+        usuario.setAtivo(true);
+
+        if (autenticar(usuario)) {
+            this.dispose();
+            FrmPrincipal frmPrincipal = new FrmPrincipal();
+            frmPrincipal.setVisible(true);
+        }        
+    }//GEN-LAST:event_btEntrarActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        if (logout) {
+            GUIUtils.confirmarSaida(this);
+        } else {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btSairActionPerformed
 
     private void initialize() {
         this.setTitle("RagaH - Login");
@@ -291,7 +301,6 @@ public class FrmLogin extends javax.swing.JDialog {
     }
 
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEntrar;
     private javax.swing.JButton btSair;
