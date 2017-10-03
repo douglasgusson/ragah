@@ -10,7 +10,7 @@ import java.util.List;
 public interface CidadeDAO {
 
     public List<Cidade> listar();
-    public Cidade buscarPorId(int id);
+    public Cidade buscarPorId(Long id);
     public List<Cidade> listarPorUf(String sigla);
     public List<Cidade> buscarPorNome(String nome);
 

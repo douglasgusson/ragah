@@ -2,7 +2,9 @@ package br.com.ragah.dao.postgresql;
 
 import br.com.ragah.dao.DAOException;
 import br.com.ragah.dao.DAOFactory;
+import br.com.ragah.dao.model.CidadeDAO;
 import br.com.ragah.dao.model.EmpresaDAO;
+import br.com.ragah.domain.Cidade;
 import br.com.ragah.domain.Empresa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,11 +24,16 @@ public class PgEmpresaDAO implements EmpresaDAO {
     public List<Empresa> listarTodas() {
 
         Connection con = DAOFactory.getDefaultDAOFactory().getConnection();
+        
         List<Empresa> list = new ArrayList<>();
 
+        CidadeDAO cidadeDAO = DAOFactory.getDefaultDAOFactory().getCidadeDAO();
+        
         try {
             String query
-                    = "";
+                    = "SELECT cod_empresa, razao_social, cnpj, endereco, cep, bairro, cidade, \n"
+                    + "       data_criacao, data_atualizacao\n"
+                    + "  FROM empresa;";
 
             PreparedStatement ps = con.prepareStatement(query);
 
@@ -35,10 +42,18 @@ public class PgEmpresaDAO implements EmpresaDAO {
             while (rs.next()) {
                 Empresa e = new Empresa();
 
-                e.setId(rs.getLong(1));
-                e.setRazaoSocial(rs.getString(2));
-                e.setCriacao(rs.getTimestamp(3).toLocalDateTime());
-                e.setAlteracao(rs.getTimestamp(4).toLocalDateTime());
+                e.setId(rs.getLong("cod_empresa"));
+                e.setRazaoSocial(rs.getString("razao_social"));
+                e.setCnpj(rs.getString("cnpj"));
+                e.setEndereco(rs.getString("endereco"));
+                e.setCep(rs.getString("cep"));
+                e.setBairro(rs.getString("bairro"));
+                
+                Cidade cidade = cidadeDAO.buscarPorId(rs.getLong("cidade"));
+                e.setCidade(cidade);
+                                
+                e.setCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                e.setAlteracao(rs.getTimestamp("data_atualizacao").toLocalDateTime());
 
                 list.add(e);
             }
@@ -46,7 +61,7 @@ public class PgEmpresaDAO implements EmpresaDAO {
             con.close();
 
         } catch (SQLException ex) {
-            throw new DAOException("Falha ao listar funções em PgFuncaoDAO", ex);
+            throw new DAOException("Falha ao listar empresas em PgEmpresaDAO", ex);
         }
 
         return list;

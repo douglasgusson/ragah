@@ -64,7 +64,7 @@ public class FrmEstadosCivis extends javax.swing.JDialog {
         tbEstadosCivis = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Acabamentos");
+        setTitle("Estados Civis");
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -167,9 +167,9 @@ public class FrmEstadosCivis extends javax.swing.JDialog {
         if (indice == -1) {
             JOptionPane.showMessageDialog(null, "Nenhum registro selecionado");
         } else {
-            FrmRegistroFuncao registroFuncao
-                    = new FrmRegistroFuncao(this, ((FuncaoTableModel) tbEstadosCivis.getModel()).getColecao(), indice);
-            registroFuncao.setVisible(true);
+            FrmRegistroEstadoCivil registroEstadoCivil
+                    = new FrmRegistroEstadoCivil(this, ((EstadoCivilTableModel) tbEstadosCivis.getModel()).getColecao(), indice);
+            registroEstadoCivil.setVisible(true);
         }
     }//GEN-LAST:event_btAlterarActionPerformed
 

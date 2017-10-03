@@ -60,7 +60,7 @@ public class PgCidadeDAO implements CidadeDAO {
     }
 
     @Override
-    public Cidade buscarPorId(int id) {
+    public Cidade buscarPorId(Long id) {
 
         Connection connection = DAOFactory.getDefaultDAOFactory().getConnection();
 
@@ -75,7 +75,7 @@ public class PgCidadeDAO implements CidadeDAO {
                     + "    WHERE cod_cidade = ?;";
 
             try (PreparedStatement ps = connection.prepareStatement(SQL)) {
-                ps.setInt(1, id);
+                ps.setLong(1, id);
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {

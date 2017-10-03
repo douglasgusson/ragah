@@ -270,7 +270,7 @@ public class FrmLogin extends javax.swing.JDialog {
 
         UsuarioDAO usuarioDAO = DAOFactory.getDefaultDAOFactory().getUsuarioDAO();
         Usuario u = usuarioDAO.buscarPorNome(usuario.getNomeUsuario());
-        
+
         if (u.getId() != null) {
             if (!usuario.getSenha().equals(u.getSenha())) {
                 lbStatus.setText("* Senha inválida.");
@@ -291,7 +291,7 @@ public class FrmLogin extends javax.swing.JDialog {
     }
 
 
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEntrar;
     private javax.swing.JButton btSair;
