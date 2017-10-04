@@ -21,7 +21,7 @@ public class DateUtils {
             LocalDate ld = dateTime.toLocalDate();
             return (ld);
         } catch (Exception e) {
-            throw new GenericException(e);
+            throw new GenericException("Falha ao tentar converter a data", e);
         }
     }
 

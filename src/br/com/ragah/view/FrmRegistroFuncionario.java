@@ -12,19 +12,22 @@ import br.com.ragah.domain.Funcao;
 import br.com.ragah.domain.Funcionario;
 import br.com.ragah.domain.TelefoneFuncionario;
 import br.com.ragah.table.model.TelefoneFuncionarioTableModel;
-import br.com.ragah.util.DateUtils;
+import br.com.ragah.util.GenericException;
 import br.com.ragah.util.Sessao;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Window;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
 
@@ -484,18 +487,24 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
         } else if (tfCpf.getText().trim().equals("")) {
             tfCpf.setBorder(borderRed);
             tfCpf.requestFocus();
+        } else if (dcDataNacimento.getCalendar() == null){
+            JOptionPane.showMessageDialog(null, "A data de nascimento deve ser informada.");
+        } else if ((cbEstadoCivil.getItemAt(cbEstadoCivil.getSelectedIndex())) == null) { 
+            cbEstadoCivil.setBorder(borderRed);
+            cbEstadoCivil.requestFocus();
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
             FuncionarioDAO fdao = DAOFactory.getDefaultDAOFactory().getFuncionarioDAO();
             TelefoneFuncionarioDAO tfdao = DAOFactory.getDefaultDAOFactory().getTelefoneFuncionarioDAO();
-            DateUtils dateUtils = new DateUtils();
 
             switch (opcao) {
 
                 case OPCAO_INSERIR:
 
                     Funcionario f = new Funcionario();
+                    Instant instant;
+                    LocalDateTime dateTime;
 
                     f.setMatricula(Integer.parseInt(tfMatricula.getText()));
                     f.setNome(tfNome.getText());
@@ -503,20 +512,38 @@ public class FrmRegistroFuncionario extends javax.swing.JDialog {
                     f.setRg(tfRg.getText());
                     f.setCtps(tfCtps.getText());
 
-                    LocalDate dataNascimento = dateUtils.calendarToLocalDate(dcDataNacimento.getCalendar());
-                    f.setDataNascimento(dataNascimento);
+                    try {
+                        instant = dcDataNacimento.getCalendar().toInstant();
+                        dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                        LocalDate dataNascimento = dateTime.toLocalDate();
+                        f.setDataNascimento(dataNascimento);
+                    } catch (Exception e) {
+                        throw new GenericException("Falha ao tentar converter a data", e);
+                    }
 
                     EstadoCivil ec = (EstadoCivil) cbEstadoCivil.getItemAt(cbEstadoCivil.getSelectedIndex());
                     f.setEstadoCivil(ec);
 
                     f.setSalario(new BigDecimal(tfSalario.getText().replace(",", ".")));
 
-                    LocalDate dataAdmissao = dateUtils.calendarToLocalDate(dcDataAdmissao.getCalendar());
-                    f.setDataAdmissao(dataAdmissao);
+                    try {
+                        instant = dcDataAdmissao.getCalendar().toInstant();
+                        dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                        LocalDate dataAdmissao = dateTime.toLocalDate();
+                        f.setDataAdmissao(dataAdmissao);
+                    } catch (Exception e) {
+                        throw new GenericException("Falha ao tentar converter a data", e);
+                    }
 
                     if (dcDataDemissao.getCalendar() != null) {
-                        LocalDate dataDemissao = dateUtils.calendarToLocalDate(dcDataDemissao.getCalendar());
-                        f.setDataDemissao(dataDemissao);
+                        try {
+                            instant = dcDataDemissao.getCalendar().toInstant();
+                            dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+                            LocalDate dataDemissao = dateTime.toLocalDate();
+                            f.setDataDemissao(dataDemissao);
+                        } catch (Exception e) {
+                            throw new GenericException("Falha ao tentar converter a data", e);
+                        }
                     } else {
                         f.setDataDemissao(null);
                     }
