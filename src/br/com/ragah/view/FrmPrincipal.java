@@ -38,11 +38,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lbNome = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btLogout = new javax.swing.JButton();
         btSair = new javax.swing.JButton();
+        btLogout = new javax.swing.JButton();
         barraMenu = new javax.swing.JMenuBar();
         menuCadastros = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         menuSistema = new javax.swing.JMenu();
@@ -93,23 +94,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Nome:");
 
-        btLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/logout_16x16.png"))); // NOI18N
-        btLogout.setText("Logout");
-        btLogout.setContentAreaFilled(false);
-        btLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLogoutActionPerformed(evt);
-            }
-        });
-
-        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/sair_16x16.png"))); // NOI18N
+        btSair.setBackground(new java.awt.Color(231, 76, 60));
+        btSair.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        btSair.setForeground(new java.awt.Color(255, 255, 255));
         btSair.setText("Sair");
-        btSair.setContentAreaFilled(false);
         btSair.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSairActionPerformed(evt);
+            }
+        });
+
+        btLogout.setBackground(new java.awt.Color(52, 152, 219));
+        btLogout.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        btLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btLogout.setText("Logout");
+        btLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLogoutActionPerformed(evt);
             }
         });
 
@@ -126,11 +129,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btLogout)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btSair)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -139,7 +137,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
-                            .addComponent(lbUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(lbUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btLogout)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btSair)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,7 +170,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(852, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -175,7 +178,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(481, Short.MAX_VALUE)
+                .addContainerGap(463, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -187,6 +190,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuCadastros.setText("Cadastros");
         menuCadastros.setToolTipText("T");
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/funcionario_16x16.png"))); // NOI18N
         jMenuItem3.setMnemonic('F');
         jMenuItem3.setText("Funcionários");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +200,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastros.add(jMenuItem3);
+        menuCadastros.add(jSeparator1);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/tabela.png"))); // NOI18N
         jMenuItem1.setMnemonic('u');
         jMenuItem1.setText("Funções");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +212,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuCadastros.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/tabela.png"))); // NOI18N
         jMenuItem2.setMnemonic('E');
         jMenuItem2.setText("Estados Civis");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +228,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuSistema.setMnemonic('S');
         menuSistema.setText("Sistema");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/troca_16x16.png"))); // NOI18N
         jMenuItem4.setMnemonic('e');
         jMenuItem4.setText("Mudar empresa");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +238,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuSistema.add(jMenuItem4);
 
+        itemConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/engrenagem_16x16.png"))); // NOI18N
         itemConfiguracoes.setMnemonic('C');
         itemConfiguracoes.setText("Configurações");
         itemConfiguracoes.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +248,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         menuSistema.add(itemConfiguracoes);
 
+        itemMudarSenha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/usuario_16x16.png"))); // NOI18N
         itemMudarSenha.setMnemonic('M');
         itemMudarSenha.setText("Mudar minha senha");
         itemMudarSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +259,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuSistema.add(itemMudarSenha);
 
         itemLogout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        itemLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/logout_16x16.png"))); // NOI18N
         itemLogout.setMnemonic('L');
         itemLogout.setText("Logout");
         itemLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +270,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuSistema.add(itemLogout);
 
         itemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        itemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ragah/img/sair_16x16.png"))); // NOI18N
         itemSair.setMnemonic('S');
         itemSair.setText("Sair");
         itemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -307,16 +320,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         configuracoes.setVisible(true);
     }//GEN-LAST:event_itemConfiguracoesActionPerformed
 
-    private void btLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLogoutActionPerformed
-        FrmLogin login = new FrmLogin(this);
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btLogoutActionPerformed
-
-    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        GUIUtils.confirmarSaida(this);
-    }//GEN-LAST:event_btSairActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         GUIUtils.confirmarSaida(this);
     }//GEN-LAST:event_formWindowClosing
@@ -364,6 +367,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 + " - " + Sessao.getEmpresa().getRazaoSocial());
     }//GEN-LAST:event_formWindowActivated
 
+    private void btLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLogoutActionPerformed
+        FrmLogin login = new FrmLogin(this);
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btLogoutActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        GUIUtils.confirmarSaida(this);
+    }//GEN-LAST:event_btSairActionPerformed
+
     private void initialize() {
         setPermissoes();
 
@@ -374,7 +387,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(FrmPrincipal.DO_NOTHING_ON_CLOSE);
 
         if (Sessao.getUsuario().getNovaSenha()) {
-            JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null,
                     "Por motivos de segurança, será necessário mudar sua senha.");
             FrmMudaSenha mudaSenha = new FrmMudaSenha(this);
             mudaSenha.setVisible(true);
@@ -416,6 +429,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JLabel lbAcesso;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbUsuario;
